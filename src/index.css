@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+/* Design tokens: Majorelle blue for actions, saffron for deals and highlights,
+   a cool blue-biased neutral ground. Every color is a CSS variable so dark mode
+   only redefines values. */
+:root {
+  --bg: #f4f5fa;
+  --surface: #ffffff;
+  --surface-2: #eceef7;
+  --ink: #151935;
+  --muted: #5c6283;
+  --line: #dfe2ee;
+  --brand: #2b3ad0;
+  --brand-strong: #1e2aa3;
+  --brand-soft: #e6e9ff;
+  --on-brand: #ffffff;
+  --saffron: #f5b331;
+  --saffron-soft: #fff2d6;
+  --on-saffron: #2a1d00;
+  --deal: #de3f2a;
+  --deal-soft: #fde8e4;
+  --ok: #0f8257;
+  --ok-soft: #dff4ea;
+  --warn: #9e5f00;
+  --warn-soft: #fff0d4;
+  --danger: #c42e27;
+  --danger-soft: #fce6e4;
+  --overlay: rgb(14 17 40 / 0.5);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d0f21;
+    --surface: #161931;
+    --surface-2: #1f2342;
+    --ink: #edeffa;
+    --muted: #a2a7c8;
+    --line: #2c3158;
+    --brand: #7d89ff;
+    --brand-strong: #9aa3ff;
+    --brand-soft: #252b5e;
+    --on-brand: #0d0f21;
+    --saffron-soft: #3a2e12;
+    --deal: #ff6e5a;
+    --deal-soft: #3d1d1a;
+    --ok: #3ecf8e;
+    --ok-soft: #123628;
+    --warn: #f2b34b;
+    --warn-soft: #392b12;
+    --danger: #ff7a72;
+    --danger-soft: #3d1c1c;
+    --overlay: rgb(0 0 0 / 0.62);
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-brand: var(--brand);
+  --color-brand-strong: var(--brand-strong);
+  --color-brand-soft: var(--brand-soft);
+  --color-on-brand: var(--on-brand);
+  --color-saffron: var(--saffron);
+  --color-saffron-soft: var(--saffron-soft);
+  --color-on-saffron: var(--on-saffron);
+  --color-deal: var(--deal);
+  --color-deal-soft: var(--deal-soft);
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-overlay: var(--overlay);
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Figtree", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --shadow-card: 0 1px 2px rgb(20 25 60 / 0.06), 0 10px 30px rgb(20 25 60 / 0.07);
+  --animate-pop: pop 0.45s cubic-bezier(0.2, 1.4, 0.4, 1);
+  --animate-rise: rise 0.25s cubic-bezier(0.2, 0.9, 0.3, 1);
+  --animate-shimmer: shimmer 1.3s infinite;
+}
+
+@keyframes pop {
+  from { transform: scale(0.4); opacity: 0.3; }
+  to { transform: scale(1); opacity: 1; }
+}
+@keyframes rise {
+  from { transform: translateY(16px); opacity: 0.4; }
+}
+@keyframes shimmer {
+  to { background-position: -200% 0; }
+}
+
+@layer base {
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+    letter-spacing: -0.01em;
+  }
+  :focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
+}
+
+@utility container-page {
+  max-width: 1240px;
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+@utility zellige {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cpath d='M32 6l7 19 19 7-19 7-7 19-7-19-19-7 19-7z' fill='none' stroke='%23fff' stroke-opacity='.13' stroke-width='1.5'/%3E%3C/svg%3E");
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
